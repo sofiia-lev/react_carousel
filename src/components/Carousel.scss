@@ -1,14 +1,42 @@
 .Carousel-wrapper {
   position: relative;
-  // width: 390px;
   margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+
+  .Carousel__window {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    width: 100%;
+
+    .Carousel__list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: block;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      flex-shrink: 0;
+
+      img {
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
 
   .Carousel__btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-
     width: 32px;
     height: 32px;
     border: 1px solid #ccc;
@@ -20,6 +48,13 @@
     font-weight: bold;
     font-size: 16px;
     transition: all 0.2s ease;
+    z-index: 10;
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      background-color: #eee;
+    }
 
     &:hover:not(:disabled) {
       background-color: #f0f0f0;
@@ -33,37 +68,6 @@
     &--next {
       right: -45px;
     }
-
-    &--disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background-color: #eee;
-    }
   }
 }
 
-.Carousel {
-  // width: 390px;
-  overflow: hidden;
-
-  &__list {
-    // width: 1300px;
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    height: 130px;
-    // width: 130px;
-    padding: 0;
-    box-sizing: border-box;
-
-    img {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-    }
-  }
-}

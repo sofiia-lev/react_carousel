@@ -26,6 +26,7 @@ const Carousel: React.FC<Props> = ({
   const offset = visibleImages * itemWidth;
   const maxVisibleImages = images.length - frameSize;
   const listWidth = images.length * itemWidth;
+  const carouselWidth = countCarouselWidth(itemWidth, frameSize);
 
   function handleNext() {
     if (infinite && visibleImages >= maxVisibleImages) {
@@ -44,14 +45,8 @@ const Carousel: React.FC<Props> = ({
   }
 
   return (
-    <div
-      className="Carousel-wrapper"
-      style={{ width: `${countCarouselWidth(itemWidth, frameSize)}px` }}
-    >
-      <div
-        className="Carousel"
-        style={{ width: `${countCarouselWidth(itemWidth, frameSize)}px` }}
-      >
+    <div className="Carousel-wrapper" style={{ width: `${carouselWidth}px` }}>
+      <div className="Carousel__window">
         <ul
           className="Carousel__list"
           style={{
@@ -61,7 +56,10 @@ const Carousel: React.FC<Props> = ({
           }}
         >
           {images.map((image: string, index: number) => (
-            <li key={index}>
+            <li
+              key={index}
+              style={{ width: `${itemWidth}px`, height: `${itemWidth}px` }}
+            >
               <img
                 src={image}
                 alt={`Image ${index + 1}`}
@@ -71,26 +69,26 @@ const Carousel: React.FC<Props> = ({
             </li>
           ))}
         </ul>
-
-        <button
-          className="Carousel__btn Carousel__btn--prev"
-          type="button"
-          onClick={handlePrev}
-          disabled={!infinite && visibleImages === 0}
-        >
-          {'<='}
-        </button>
-
-        <button
-          className="Carousel__btn Carousel__btn--next"
-          type="button"
-          onClick={handleNext}
-          disabled={!infinite && visibleImages === maxVisibleImages}
-          data-cy="next"
-        >
-          {'=>'}
-        </button>
       </div>
+
+      <button
+        className="Carousel__btn Carousel__btn--prev"
+        type="button"
+        onClick={handlePrev}
+        disabled={!infinite && visibleImages === 0}
+      >
+        ‹
+      </button>
+
+      <button
+        className="Carousel__btn Carousel__btn--next"
+        type="button"
+        onClick={handleNext}
+        disabled={!infinite && visibleImages === maxVisibleImages}
+        data-cy="next"
+      >
+        ›
+      </button>
     </div>
   );
 };

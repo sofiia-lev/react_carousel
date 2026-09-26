@@ -46,7 +46,7 @@ const Carousel: React.FC<Props> = ({
 
   return (
     <div className="Carousel-wrapper" style={{ width: `${carouselWidth}px` }}>
-      <div className="Carousel__window">
+      <div className="Carousel__window" style={{ width: `${carouselWidth}px` }}>
         <ul
           className="Carousel__list"
           style={{
@@ -76,6 +76,7 @@ const Carousel: React.FC<Props> = ({
         type="button"
         onClick={handlePrev}
         disabled={!infinite && visibleImages === 0}
+        data-cy="prev"
       >
         ‹
       </button>
